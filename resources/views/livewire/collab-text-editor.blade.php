@@ -6,10 +6,10 @@
         {{ url()->current() . "/$random" }}</h1>
 
     <div {{ $permission ? '' : 'disabled' }} id="quill-editor" class="mb-3 mx-8" style="height: 300px;"></div>
-    <textarea {{ $permission ? '' : 'disabled' }} hidden rows="3" class="mb-3 d-none" name="job_description"
-        id="quill-editor-area"></textarea>
+    <input class="w-full border-0 text-base-100" type="text" {{ $permission ? '' : 'disabled' }} name="job_description"
+        id="quill-editor-area"></input>
     <div>
-        <button type="button" wire:click="test"> test</button>
+        <button type="button" class="btn btn-primary"> Request Ownership</button>
     </div>
 
 </div>
