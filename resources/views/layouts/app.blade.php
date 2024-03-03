@@ -20,7 +20,7 @@
 </head>
 
 <body class="font-sans antialiased max-h-screen overflow-hidden">
-    <div class="min-h-screen bg-base-100">
+    <div class="min-h-screen bg-base-100 max-h-screen">
         <!-- Page Heading -->
         <header>
             <div class="navbar bg-base-200">
@@ -90,7 +90,7 @@
         <main>
             <div class="w-full h-full flex flex-row">
                 <livewire:layout.navigation />
-                <div class="flex flex-grow justify-center align-bottom">
+                <div class="flex h-full w-full justify-center align-bottom">
                     {{ $slot }}
                 </div>
                 <livewire:online-users />
