@@ -1,6 +1,6 @@
 <div @added_message="$wire.$refresh()" class="px-6 py-2 content-end min-w-full overflow-auto" ">
     <div class="flex flex-col self-stretch">
-             @foreach ($thread->messages as $message)
+                 @foreach ($thread->messages as $message)
     <div class="w-full mb-2 p-2 {{ $message->marked_as_answer ? 'border border-green-400 rounded-lg' : '' }}">
         <div class="flex flex-row">
             <div class="avatar placeholder my-auto">
@@ -41,21 +41,23 @@
         <span class="label-text">Send a message!</span>
     </div>
     <div>
-        <input type="text" wire:model.live="enteredText" wire:keydown.enter="sendMessage"
+        <input id="textual" type="text" wire:model.live="enteredText" wire:keydown.enter="sendMessage"
             class="input input-bordered w-full" placeholder="Let's get some collab rolling..."></input>
     </div>
 
 </div>
 @script
     <script>
-        $wire.on('added_message', () => {
-            window.client.publish("thread-{{ $thread->id }}", "update :)", (err) => {
-                if (!err) {
-                    console.log("happy");
-                } else {
-                    console.log("sad");
-                }
-            });
+        document.getElementById('textual').addEventListener('keypress', function(e) {
+            if (e.key == 'Enter') {
+                window.client.publish("thread-{{ $thread->id }}", "{{ $thread->id }}", (err) => {
+                    if (!err) {
+                        console.log("happy");
+                    } else {
+                        console.log("sad");
+                    }
+                });
+            }
         });
         window.client.subscribe("thread-{{ $thread->id }}", function(err) {
             if (!err) {

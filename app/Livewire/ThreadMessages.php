@@ -24,6 +24,7 @@ class ThreadMessages extends Component
     public $thereIsAnAnswer;
     public function render()
     {
+        $this->messages = $this->thread->messages()->get();
         return view('livewire.thread-messages');
     }
 
@@ -53,6 +54,8 @@ class ThreadMessages extends Component
         $message = Message::find($message_id);
         $message->marked_as_answer = true;
         $message->save();
+        $this->thread->answered_by = true;
+        $this->thread->save();
         $this->dispatch('added_message');
     }
 }

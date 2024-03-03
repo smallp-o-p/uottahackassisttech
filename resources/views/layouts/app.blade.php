@@ -15,6 +15,7 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @livewireScripts
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 </head>
 
@@ -98,7 +99,7 @@
     </div>
 
     <dialog id="my_modal_3" class="modal">
-        <div class="modal-box">
+        <div @thread_created="console.log('another')" class="modal-box">
             <livewire:create-thread />
         </div>
     </dialog>

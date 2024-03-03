@@ -2,10 +2,12 @@
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 
-    <h1 class="text-bold text-3xl text-center mb-4">Share this code for others to view: {{ $random }}</h1>
+    <h1 class="text-bold text-3xl text-center mb-4">Share this link for others to view:
+        {{ url()->current() . "/$random" }}</h1>
 
     <div {{ $permission ? '' : 'disabled' }} id="quill-editor" class="mb-3 mx-8" style="height: 300px;"></div>
-    <textarea rows="3" class="mb-3 d-none" name="job_description" id="quill-editor-area"></textarea>
+    <textarea {{ $permission ? '' : 'disabled' }} hidden rows="3" class="mb-3 d-none" name="job_description"
+        id="quill-editor-area"></textarea>
     <div>
         <button type="button" wire:click="test"> test</button>
     </div>
@@ -25,6 +27,11 @@
             var editor = new Quill('#quill-editor', {
                 theme: 'snow'
             });
+
+
+            if (!permissionToEdit) {
+                editor.enable(false);
+            }
             var quillEditor = document.getElementById('quill-editor-area');
             editor.on('text-change', function() {
                 quillEditor.value = editor.root.innerHTML;

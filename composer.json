@@ -8,6 +8,7 @@
         "php": "^8.1",
         "blade-ui-kit/blade-heroicons": "*",
         "blade-ui-kit/blade-icons": "^1.6",
+        "codeat3/blade-fluentui-system-icons": "^1.33",
         "doctrine/dbal": "^3.8",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^10.10",

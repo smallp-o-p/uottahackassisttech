@@ -33,19 +33,19 @@ new class extends Component {
                         </div>
                     </a>
                     @persist('list')
-                    <ul x-show="open_{{ $loop->index }}" class="pl-8"
+                    <ul x-show="open_{{ $loop->index }}" class="ml-8"
                         @select_room="console.log($event.detail.room_id);">
                         @foreach ($session->rooms as $room)
                             <li x-data="{ selected_{{ $loop->parent->index }}_{{ $loop->index }}: false }" href="{{ route('viewRoom', $room) }}" wire:navigate
                                 @click="
                                     selected_{{ $loop->parent->index }}_{{ $loop->index }} = !selected_{{ $loop->parent->index }}_{{ $loop->index }};"
                                 :class="selected_{{ $loop->parent->index }}_{{ $loop->index }} ?
-                                    'bg-primary opacity-80 min-w-24 flex flex-row w-full rounded-lg' :
-                                    'opacity-80 min-w-24 flex flex-row w-full rounded-lg'"
+                                    'bg-primary opacity-80 min-w-24 w-32 flex flex-row rounded-lg' :
+                                    'opacity-80 min-w-24 flex flex-row w-32 rounded-lg'"
                                 @click.outside="selected_{{ $loop->parent->index }}_{{ $loop->index }} = false">
                                 <div class="w-full">
                                     <x-heroicon-s-chat-bubble-oval-left-ellipsis class="h-6 mr-4" />
-                                    <div class="max-w-16"> {{ $room->name }} </div>
+                                    <div class="min-w-fit"> {{ $room->name }} </div>
                                 </div>
                             </li>
                         @endforeach
