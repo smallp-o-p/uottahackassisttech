@@ -13,9 +13,14 @@ class Thread extends Model
     protected $fillable = [
         'answered_by',
         'asked_by',
-
+        'title',
+        'pinned'
     ];
 
+    protected $attributes = [
+        'answered_by' => 0,
+        'pinned' => false
+    ];
     protected $casts = [
         'pinned' => 'boolean'
     ];

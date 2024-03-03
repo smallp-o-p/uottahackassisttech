@@ -11,12 +11,12 @@ class Message extends Model
 
     protected $fillable = [
         'text',
-        'marked_answer'
-
+        'marked_as_answer',
+        'user_id'
     ];
 
     protected $casts = [
-        'marked_answer' => 'boolean'
+        'marked_as_answer' => 'boolean'
     ];
 
     public function thread(): BelongsTo

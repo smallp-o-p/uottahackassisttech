@@ -14,6 +14,6 @@ class userSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory()->count(10)->create();
+        User::factory()->recycle(Session::all())->count(5)->create();
     }
 }

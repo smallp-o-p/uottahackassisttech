@@ -17,7 +17,7 @@ class OnlineUsers extends Component
     public function listMembers($session_id)
     {
         $sesh = Session::find($session_id);
-        $this->sessionMembers = $sesh->user()->get();
+        $this->sessionMembers = $sesh->users()->get();
     }
 
     public function render()
@@ -27,6 +27,6 @@ class OnlineUsers extends Component
 
     public function mount()
     {
-        $this->sessionMembers = Auth::user()->sessions->first()->user()->get();
+        $this->sessionMembers = Auth::user()->sessions->first()->users()->get();
     }
 }

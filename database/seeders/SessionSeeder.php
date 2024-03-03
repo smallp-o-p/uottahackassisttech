@@ -15,6 +15,6 @@ class SessionSeeder extends Seeder
      */
     public function run(): void
     {
-        Session::factory()->recycle(User::factory()->create())->recycle(Course::all())->count(3)->create();
+        Session::factory()->recycle(User::where('id', '<', '15'))->recycle(Course::all())->count(6)->create();
     }
 }

@@ -44,7 +44,18 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-
+    public function getRole()
+    {
+        if ($this->hasRole('student')) {
+            return 'Student';
+        } else if ($this->hasRole('ta')) {
+            return 'TA';
+        } else if ($this->hasRole('professor')) {
+            return 'Professor';
+        } else {
+            return 'Admin';
+        }
+    }
 
     public function sessions(): BelongsToMany
     {

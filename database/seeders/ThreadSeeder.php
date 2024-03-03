@@ -17,6 +17,6 @@ class ThreadSeeder extends Seeder
     {
         $users = User::all();
         $rooms = Room::all();
-        Thread::factory()->recycle($users)->recycle($rooms)->count(50)->create();
+        Thread::factory()->recycle($users)->recycle($rooms)->count(250)->create();
     }
 }

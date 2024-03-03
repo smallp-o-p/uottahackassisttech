@@ -33,7 +33,7 @@ class Session extends Model
         return $this->belongsTo(Course::class);
     }
 
-    public function user(): BelongsToMany
+    public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class);
     }
