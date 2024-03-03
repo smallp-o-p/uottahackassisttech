@@ -37,6 +37,6 @@ class CreateThread extends Component
             'title' => $this->question,
             'asked_by' => Auth::user()->id
         ]);
-        dd($thread);
+        $this->dispatch('thread_created');
     }
 }

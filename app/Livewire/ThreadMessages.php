@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Message;
 use App\Models\Thread;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
@@ -17,9 +18,10 @@ use PhpMqtt\Client\Facades\MQTT;
 class ThreadMessages extends Component
 {
     public Thread $thread;
-
-    #[Validate('required|min:3')]
+    public $messages;
     public $enteredText;
+
+    public $thereIsAnAnswer;
     public function render()
     {
         return view('livewire.thread-messages');
@@ -27,6 +29,12 @@ class ThreadMessages extends Component
 
     public function mount(Thread $thread)
     {
+        $this->messages = $thread->messages()->get();
+        if ($this->messages->where('marked_as_answer', '1')) {
+            $this->thereIsAnAnswer = true;
+        } else {
+            $this->thereIsAnAnswer = false;
+        }
     }
 
     public function sendMessage()
@@ -38,6 +46,13 @@ class ThreadMessages extends Component
         ]);
         $this->dispatch('added_message');
         $this->enteredText = '';
+    }
 
+    public function mark_answer($message_id)
+    {
+        $message = Message::find($message_id);
+        $message->marked_as_answer = true;
+        $message->save();
+        $this->dispatch('added_message');
     }
 }

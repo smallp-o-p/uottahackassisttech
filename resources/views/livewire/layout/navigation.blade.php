@@ -43,10 +43,10 @@ new class extends Component {
                                     'bg-primary opacity-80 min-w-24 flex flex-row w-full rounded-lg' :
                                     'opacity-80 min-w-24 flex flex-row w-full rounded-lg'"
                                 @click.outside="selected_{{ $loop->parent->index }}_{{ $loop->index }} = false">
-
-                                <div class="w-full"> <x-heroicon-s-chat-bubble-oval-left-ellipsis class="h-6 mr-4" />
+                                <div class="w-full">
+                                    <x-heroicon-s-chat-bubble-oval-left-ellipsis class="h-6 mr-4" />
                                     <div class="max-w-16"> {{ $room->name }} </div>
-                                    <div>
+                                </div>
                             </li>
                         @endforeach
                     </ul>

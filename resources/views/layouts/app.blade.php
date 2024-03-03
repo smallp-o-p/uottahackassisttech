@@ -11,10 +11,11 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    @stack('scripts')
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 </head>
 
 <body class="font-sans antialiased max-h-screen overflow-hidden">
@@ -46,12 +47,23 @@
                     </div>
                     <a class="btn btn-ghost text-xl">assist.tech :D</a>
                 </div>
-                <div class="navbar-center"> <button class="btn btn-primary py-2" onclick="my_modal_3.showModal()">
-                        <div class="w-full h-full flex flex-row">
-                            <x-heroicon-o-plus class="w-12" />
-                            <p class="text-lg"> Start a thread here. </p>
-                        </div>
-                    </button></div>
+                <div class="navbar-center">
+                    <div class="grid grid-rows-1 grid-cols-2 gap-x-4">
+                        <button class="btn btn-primary py-2" onclick="my_modal_3.showModal()">
+                            <div class="w-full h-full flex flex-row">
+                                <x-heroicon-o-plus class="w-12" />
+                                <p class="text-lg"> Start a thread here. </p>
+                            </div>
+                        </button>
+                        <button class="btn btn-primary py-2" onclick="my_modal_4.showModal()">
+                            <div class="w-full h-full flex flex-row">
+                                <x-heroicon-o-pencil class="w-12" />
+                                <p class="text-lg"> Start a live collab. </p>
+                            </div>
+                        </button>
+                    </div>
+
+                </div>
                 <div class="navbar-end">
                     <div class=mr-4> {{ Auth::user()->username }}</div>
                     <div class="dropdown dropdown-end">
@@ -64,7 +76,7 @@
                             <div>
                                 <ul tabindex="0"
                                     class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-48 py-2">
-                                    <li><a>Logout</a></li>
+                                    <li><a href="{{ route('logout') }}">Logout</a></li>
                                     <li><a>Item 2</a></li>
                                 </ul>
                             </div>
@@ -88,6 +100,24 @@
     <dialog id="my_modal_3" class="modal">
         <div class="modal-box">
             <livewire:create-thread />
+        </div>
+    </dialog>
+
+
+    <dialog id="my_modal_4" class="modal">
+        <div class="modal-box">
+            <form method="dialog">
+                <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+            </form>
+            <h1 class="text-3xl text-center"> Pick a document to collaborate on</h1>
+            <ul class="text-lg mt-4">
+                <li class="mb-2"> <button wire:navigate href="{{ route('editorText') }}"
+                        class="btn btn-primary text-lg w-full text-center"> Text Editor</button>
+                </li>
+                <li <button class=" btn btn-primary text-lg p-2 w-full text-center">
+                    Whiteboard (not implemented)
+                    </button> </li>
+            </ul>
         </div>
     </dialog>
 </body>

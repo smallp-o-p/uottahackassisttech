@@ -1,4 +1,4 @@
-<div class="mx-auto">
+<div class="mx-auto w-full">
     @if (!is_null($room))
         @if (count($room->threads) == 0)
             <div class="card bg-base-200 w-5/6 indicator flex  border border-neutral-content mx-auto mt-16">
@@ -18,3 +18,27 @@
         @endif
     @endif
 </div>
+@script
+    <script>
+        $wire.on('thread_created', () => {
+            console.log("caught");
+        });
+        window.client.unsubscribe("room-" + window.currentRoom.toString(), (err) => {
+            if (!err) {
+                console.log("unscubscribed from room-" + window.currentRoom.toString());
+            } else {
+                console.log(":(");
+            }
+        });
+        window.client.subscribe("room-{{ $room->id ?? 0 }}", function(err) {
+            if (!err) {
+                console.log("subscribed to room-{{ $room->id ?? 0 }}");
+                window.currentRoom = {{ $room->id ?? 0 }}
+            }
+        });
+        window.client.on("message", function() {
+            $wire.$refresh();
+            console.log("someone created a thread");
+        });
+    </script>
+@endscript

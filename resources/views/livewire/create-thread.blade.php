@@ -20,5 +20,8 @@
     </div>
     <textarea class="textarea textarea-bordered textarea-lg w-full" placeholder="What's on your mind?"
         wire:model="question"> </textarea>
-    <button class="btn btn-primary w-full mt-4 text-lg" wire:click="createThread({{ $selectedRoom }})">Submit</button>
+    <form method="dialog">
+        <button class="btn btn-primary w-full mt-4 text-lg"
+            wire:click="createThread({{ $selectedRoom }})">Submit</button>
+    </form>
 </div>

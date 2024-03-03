@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\CollabTextEditor;
 use App\Livewire\MainView;
 use App\Livewire\ThreadMessages;
 use App\Livewire\ThreadView;
@@ -36,8 +37,17 @@ Route::get('room/{room}', MainView::class)
     ->middleware(['auth'])
     ->name('viewRoom');
 
+Route::get('logout', function () {
+    Auth::guard('web')->logout();
+    Session::invalidate();
+    Session::regenerateToken();
+    return redirect('/');
+})->name('logout');
+
 
 Route::get('/helloworld', function () {
     return view('helloworld');
 });
+
+Route::get('editorText/{random?}', CollabTextEditor::class)->name('editorText');
 require __DIR__ . '/auth.php';
